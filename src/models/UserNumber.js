@@ -25,7 +25,6 @@ class UserNumber {
       throw new Error('[ERROR} 숫자만 입력해주세요!');
     }
     if (Number.isNaN(number)) {
-      console.log('ㅠㅅㅠ');
       throw new Error('[ERROR] 정수를 입력해주세요!');
     }
     if (!Number.isInteger(number)) {
@@ -34,6 +33,10 @@ class UserNumber {
     if (number < 1) {
       throw new Error('[ERROR] 양수를 입력해주세요!');
     }
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 
