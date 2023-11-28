@@ -22,7 +22,7 @@ class GameManager {
         return;
       }
       if (this.#computerNumbers.includes(num)) {
-        score.strike += 1;
+        score.ball += 1;
       }
     });
 
