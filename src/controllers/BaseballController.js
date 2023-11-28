@@ -13,44 +13,44 @@ class BaseballController {
     const computer = new Computer();
     const randomNumbers = computer.getRandomNumbers();
 
-    this.setComputerNumbers(randomNumbers);
+    this.#setComputerNumbers(randomNumbers);
   }
 
-  async promptNumbers() {
+  async #promptNumbers() {
     const userInput = await InputView.readNumber();
     const numbers = userInput.split('').map(str => Number(str));
 
-    this.setUserNumbers(numbers);
+    this.#setUserNumbers(numbers);
   }
 
-  setComputerNumbers(randomNumbers) {
+  #setComputerNumbers(randomNumbers) {
     this.#comNumbers = randomNumbers;
   }
 
-  setUserNumbers(numbers) {
+  #setUserNumbers(numbers) {
     this.#userNumbers = new UserNumber(numbers).getNumbers();
   }
 
-  async compare() {
+  async #compare() {
     const gameManager = new GameManager(this.#userNumbers, this.#comNumbers);
     const gameResult = gameManager.getResult();
 
     this.printResult(gameResult);
 
     if (gameResult !== '3스트라이크') {
-      await this.play();
+      await this.#play();
       return;
     }
 
     OutputView.printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    await this.askRestart();
+    await this.#askRestart();
   }
 
   printResult(gameResult) {
     OutputView.printMessage(gameResult);
   }
 
-  async askRestart() {
+  async #askRestart() {
     const userInput = await InputView.readAskNumber();
 
     if (userInput === '1') {
@@ -58,15 +58,16 @@ class BaseballController {
     }
   }
 
-  async play() {
-    await this.promptNumbers();
-    await this.compare();
+  async #play() {
+    await this.#promptNumbers();
+    await this.#compare();
   }
 
   async start() {
     this.getComputerNumbers();
     OutputView.printMessage('숫자 야구 게임을 시작합니다.');
-    await this.play();
+
+    await this.#play();
   }
 }
 export default BaseballController;
