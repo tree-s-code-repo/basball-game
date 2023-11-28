@@ -12,7 +12,6 @@ class BaseballController {
   getComputerNumbers() {
     const computer = new Computer();
     const randomNumbers = computer.getRandomNumbers();
-    console.log(randomNumbers);
 
     this.setComputerNumbers(randomNumbers);
   }
@@ -61,7 +60,7 @@ class BaseballController {
 
   async play() {
     await this.promptNumbers();
-    this.compare();
+    await this.compare();
   }
 
   async start() {
